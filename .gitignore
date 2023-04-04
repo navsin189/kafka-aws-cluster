@@ -1,0 +1,6 @@
+*.lock*
+*.tfstate*
+*.tfvars*
+/.terraform
+kickstart-commands.sh
+.terraform/
