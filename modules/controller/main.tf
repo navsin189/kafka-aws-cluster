@@ -22,9 +22,10 @@ resource "aws_instance" "zookeeper" {
   provisioner "remote-exec" {
     inline = [
       "cp /home/ec2-user/zookeeper.properties /home/ec2-user/kafka_2.13-3.4.0/config/zookeeper.properties",
-      "echo 'cd /home/ec2-user/kafka_2.13-3.4.0/ && sh bin/zookeeper-server-start.sh config/zookeeper.properties' > startup_command.sh",
+      "echo 'cd /home/ec2-user/kafka_2.13-3.4.0/ && sh bin/zookeeper-server-start.sh config/zookeeper.properties &' > startup_command.sh",
       "chmod +x startup_command.sh",
-      "nouhp ./startup_command.sh",
+      "./startup_command.sh",
+      "echo SETUP_DONE"
     ]
   }
 }
