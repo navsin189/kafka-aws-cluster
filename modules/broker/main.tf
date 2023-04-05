@@ -23,9 +23,9 @@ resource "aws_instance" "broker" {
   provisioner "remote-exec" {
     inline = [
       "sed -i 's/broker.id=0/broker.id=${var.broker_id}/g' /home/ec2-user/server.properties",
-      "sed -i 's/localhost:2181/${var.zookeeper_public_ip}:${var.zookeeper_external_port}' /home/ec2-user/server.properties",
+      "sed -i 's/localhost:2181/${var.zookeeper_public_ip}:${var.zookeeper_external_port}/' /home/ec2-user/server.properties",
       "cp /home/ec2-user/server.properties /home/ec2-user/kafka_2.13-3.4.0/config/server.properties",
-      "echo 'cd /home/ec2-user/kafka_2.13-3.4.0/ && sh bin/kafka-server-start.sh config/server.properties &' > startup_command.sh",
+      "echo 'cd /home/ec2-user/kafka_2.13-3.4.0/ && sh bin/kafka-server-start.sh -daemon config/server.properties' > startup_command.sh",
       "chmod +x startup_command.sh",
       "./startup_command.sh",
       "echo SETUP_DONE"

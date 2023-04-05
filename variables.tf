@@ -11,13 +11,13 @@ variable "ami_image_id" {
 
 variable "ami_instance_type" {
   type        = string
-  default     = "t2.medium"
+  default     = "t2.small"
   description = "instance type"
 }
 
 variable "av_zone"{
     type = string
-    default = "ap-south-1a"
+    default = "ap-south-1b"
 }
 
 variable "key_name" {
