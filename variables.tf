@@ -35,7 +35,7 @@ variable "kickstart_command" {
   type        = list(string)
   description = "common command runs on all machine"
   default = [
-        "sudo dnf install wget vim net-tools coreutils -y",
+        "sudo dnf install wget vim net-tools -y",
         "wget https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.rpm",
         "sudo rpm -ivh jdk-20_linux-x64_bin.rpm",
         "wget https://dlcdn.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz",
