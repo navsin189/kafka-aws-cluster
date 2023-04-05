@@ -1,7 +1,7 @@
 # Kafka Cluster on AWS EC2
 
-[Introduction to Kafka](https://medium.com/@sunnykkc13/introduction-to-kafka-2f274f922c17)
-[Kafka local setup](https://medium.com/@sunnykkc13/kafka-setup-91b33fb50c86)
+- [Introduction to Kafka](https://medium.com/@sunnykkc13/introduction-to-kafka-2f274f922c17)
+- [Kafka local setup](https://medium.com/@sunnykkc13/kafka-setup-91b33fb50c86)
 
 ## prerequisite/Dev Environment Setup
 
@@ -25,12 +25,12 @@ cd kafka-aws-cluster
 terraform init
 ```
 
--`init` initialize the directory.
+- `init` initialize the directory.
 
 - **Note** - a file named `secrets.tfvars` needs to be created under `kafka-aws-cluster` directory.
 - it will hold two sensitive value mentioned
-- - key_name = "key name used to SSH on EC2 instance"
-- - key_name_path = "key path in your local system"
+  - key_name = "key name used to SSH on EC2 instance"
+  - key_name_path = "key path in your local system"
 
 ```
 terraform plan -var-file="secrets.tfvars"
