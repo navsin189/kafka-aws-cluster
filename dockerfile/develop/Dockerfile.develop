@@ -1,0 +1,24 @@
+FROM alpine:3.17.3 as base
+
+RUN wget https://dlcdn.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz && tar xvf kafka_2.13-3.4.0.tgz && rm -f kafka_2.13-3.4.0.tgz
+
+WORKDIR /kafka_2.13-3.4.0
+
+COPY exporter.py .
+
+RUN wget https://bootstrap.pypa.io/get-pip.py
+
+
+FROM alpine:3.17.3
+
+COPY --from=base /kafka_2.13-3.4.0 /kafka_2.13-3.4.0
+
+WORKDIR /kafka_2.13-3.4.0
+
+RUN apk add openjdk11 bash gcc python3 python3-dev musl-dev linux-headers
+
+RUN python3 get-pip.py
+
+RUN pip install psutil prometheus-client
+
+CMD ["python3", "exporter.py"]
