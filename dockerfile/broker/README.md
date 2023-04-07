@@ -1,10 +1,20 @@
-## Broker Docker Image
+# Broker Docker Image
+
+## Version 2.0
+
+- Broker image is now available on docker hub.
+
+```
+docker run -dit --network kafka -p 9092:9092 -e broker_id=${unique_number} --name broker1 navsin189/broker:1.0
+```
+
+## Version 1.0
 
 - custom kafka as base image
 - copied a script to run server instead of directly running the kafka server.
 - exposed to 9092
 
-## custom script
+### custom script
 
 - The `change_broker_properties.sh` script changes the **broker id** in the server config file
 - Every broker should have unique ID.

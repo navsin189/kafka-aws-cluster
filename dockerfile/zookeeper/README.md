@@ -1,4 +1,14 @@
-## zookeeper Docker Image
+# zookeeper Docker Image
+
+## Version 2.0
+
+- ZooKeeper image is now available on docker hub.
+
+```
+docker run -dit --network kafka -p 2181:2181 --name zookeeper navsin189/zookeeper:1.0
+```
+
+## Version 3.0
 
 - custom kafka image as base
 - starting zookeeper server at port 2181

@@ -1,4 +1,11 @@
-## Kafka Docker Image
+# Kafka Docker Image
+
+## Version 2.0
+
+- Kafka image is now available on docker hub.
+- image name - **navsin189/kafka:1.0**
+
+## Version 1.0
 
 - took alpine as base
 - installed openJDK11
