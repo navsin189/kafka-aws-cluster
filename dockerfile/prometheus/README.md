@@ -1,5 +1,11 @@
 # Prometheus Docker Image
 
+### Currenly not supporting JOBS due to exporters in zookeeper and broker containers are not working.
+
+### will be fixed in upcoming version.
+
+### Although Prometheus is still working and shows metrics for its own container.
+
 ## Version 2.0
 
 - Prometheus image is now available on docker hub.
