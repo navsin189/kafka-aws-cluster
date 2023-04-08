@@ -8,7 +8,7 @@
 docker run -dit --network kafka -p 2181:2181 --name zookeeper navsin189/zookeeper:1.0
 ```
 
-## Version 3.0
+## Version 1.0
 
 - custom kafka image as base
 - starting zookeeper server at port 2181
