@@ -1,20 +1,37 @@
 # Prometheus Docker Image
 
-### Currenly not supporting JOBS due to exporters in zookeeper and broker containers are not working.
-
-### will be fixed in upcoming version.
-
-### Although Prometheus is still working and shows metrics for its own container.
-
 ## Version 2.0
 
 - Prometheus image is now available on docker hub.
+- To monitor containers [cadvisor](https://github.com/google/cadvisor).
+- [Prometheus with cadvisor](https://prometheus.io/docs/guides/cadvisor/).
 
 ```
-# here prometheus is not able to connect via container name that's why
-# need to switch to host IP, host on which docker is running
+docker run \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:ro \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --volume=/dev/disk/:/dev/disk:ro \
+  --publish=8080:8080 \
+  --detach=true \
+  --name=cadvisor \
+  --network kafka \
+  --device=/dev/kmsg \
+  gcr.io/cadvisor/cadvisor:$VERSION
 
-docker run -dit -p 9090:9090 --network kafka -e JOBS="zookeeper@${ip_of_host_machine}:2181 broker1@${ip_of_host_machine}:${broker1_port} broker2@${broker2_container_name}:${broker2_port}" --name prometheus navsin189/prometheus:1.0
+docker run -dit -p 9090:9090 --network kafka -e JOBS="cadvisor@cadvisor:8080" --name prometheus navsin189/prometheus:1.0
+```
+
+- CAdvisor provides a web UI used to stats of containers on http://localhost:8080/docker/
+- Prometheus WEB UI on http://localhost:9090/graph
+- [Query language used for containers in prometheus](https://prometheus.io/docs/guides/cadvisor/#other-expressions)
+
+```
+rate(container_cpu_usage_seconds_total{name="container_name"}[1m])
+container_memory_usage_bytes{name="redis"}
+rate(container_network_transmit_bytes_total[1m])
+rate(container_network_receive_bytes_total[1m])
 ```
 
 ## Version 1.0
