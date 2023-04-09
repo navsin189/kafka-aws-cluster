@@ -1,0 +1,38 @@
+version: '3.2'
+services:
+  prometheus:
+    image: navsin189/prometheus:1.0
+    container_name: prometheus
+    ports:
+    - 9090:9090
+    depends_on:
+    - cadvisor
+    environment:
+      - JOBS=cadvisor@cadvisor:8080
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+    - 8080:8080
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    - /dev/disk/:/dev/disk:ro
+    depends_on:
+    - zookeeper
+  zookeeper:
+    image: navsin189/kafka-zookeeper:1.0
+    container_name: zookeeper
+    ports:
+    - 2181:2181
+  broker:
+    image: navsin189/kafka-broker:1.0
+    container_name: broker1
+    ports:
+    -  9092:9092
+    environment:
+      - broker_id=24
+    depends_on:
+      - zookeeper
